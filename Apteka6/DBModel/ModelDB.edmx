@@ -1,0 +1,931 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AptekaWPFModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Byers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FName" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Login" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="CategoryTovar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FName" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Zarplata" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="Login" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Favourites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Byers_Id" Type="int" Nullable="false" />
+          <Property Name="Tovar_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HistoryZakaz">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Byers_Id" Type="int" Nullable="false" />
+          <Property Name="TovarId" Type="int" Nullable="false" />
+          <Property Name="Status_Id" Type="int" Nullable="false" />
+          <Property Name="TimeDelivery" Type="datetime" />
+          <Property Name="Employee_Id" Type="int" />
+          <Property Name="PayMethodID" Type="int" />
+          <Property Name="Ocenka" Type="int" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PayMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ByerID" Type="int" />
+          <Property Name="TovarID" Type="int" />
+          <Property Name="Review" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bonus" Type="decimal" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="ShoppingCart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TovarID" Type="int" />
+          <Property Name="ByerID" Type="int" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="StatusZakaz">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tovars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Category_Id" Type="int" />
+          <Property Name="Image" Type="image" />
+          <Property Name="Count" Type="int" />
+          <Property Name="SrokGodnostiDate" Type="date" />
+          <Property Name="Info" Type="varchar" MaxLength="300" />
+          <Property Name="Instuction" Type="varchar" MaxLength="500" />
+          <Property Name="Price" Type="decimal" Precision="7" Scale="0" />
+          <Property Name="SrokGodnosti" Type="varchar" MaxLength="10" />
+          <Property Name="Resept" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Byers_Logins">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Byers" Type="Self.Byers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="Byers">
+              <PropertyRef Name="Login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Logins">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourites_Byers">
+          <End Role="Byers" Type="Self.Byers" Multiplicity="1" />
+          <End Role="Favourites" Type="Self.Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Byers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="Byers_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourites_Tovars">
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="1" />
+          <End Role="Favourites" Type="Self.Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="Tovar_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_Byers">
+          <End Role="Byers" Type="Self.Byers" Multiplicity="1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Byers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="Byers_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_PayMethod">
+          <End Role="PayMethod" Type="Self.PayMethod" Multiplicity="0..1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayMethod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="PayMethodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_StatusZakaz">
+          <End Role="StatusZakaz" Type="Self.StatusZakaz" Multiplicity="1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusZakaz">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_Tovars">
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="TovarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Byers">
+          <End Role="Byers" Type="Self.Byers" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Byers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ByerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Tovars">
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="TovarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCart_Byers">
+          <End Role="Byers" Type="Self.Byers" Multiplicity="0..1" />
+          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Byers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingCart">
+              <PropertyRef Name="ByerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCart_Tovars">
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="0..1" />
+          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingCart">
+              <PropertyRef Name="TovarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovars_CategoryTovar">
+          <End Role="CategoryTovar" Type="Self.CategoryTovar" Multiplicity="0..1" />
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTovar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tovars">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AptekaWPFModelContainer">
+          <EntitySet Name="Byers" EntityType="Self.Byers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoryTovar" EntityType="Self.CategoryTovar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favourites" EntityType="Self.Favourites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryZakaz" EntityType="Self.HistoryZakaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayMethod" EntityType="Self.PayMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusZakaz" EntityType="Self.StatusZakaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tovars" EntityType="Self.Tovars" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Byers_Logins" Association="Self.FK_Byers_Logins">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Byers" EntitySet="Byers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Logins" Association="Self.FK_Employee_Logins">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Roles" Association="Self.FK_Employee_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourites_Byers" Association="Self.FK_Favourites_Byers">
+            <End Role="Byers" EntitySet="Byers" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourites_Tovars" Association="Self.FK_Favourites_Tovars">
+            <End Role="Tovars" EntitySet="Tovars" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_Byers" Association="Self.FK_HistoryZakaz_Byers">
+            <End Role="Byers" EntitySet="Byers" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_Employee" Association="Self.FK_HistoryZakaz_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_PayMethod" Association="Self.FK_HistoryZakaz_PayMethod">
+            <End Role="PayMethod" EntitySet="PayMethod" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_StatusZakaz" Association="Self.FK_HistoryZakaz_StatusZakaz">
+            <End Role="StatusZakaz" EntitySet="StatusZakaz" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_Tovars" Association="Self.FK_HistoryZakaz_Tovars">
+            <End Role="Tovars" EntitySet="Tovars" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Byers" Association="Self.FK_Reviews_Byers">
+            <End Role="Byers" EntitySet="Byers" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Tovars" Association="Self.FK_Reviews_Tovars">
+            <End Role="Tovars" EntitySet="Tovars" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCart_Byers" Association="Self.FK_ShoppingCart_Byers">
+            <End Role="Byers" EntitySet="Byers" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCart_Tovars" Association="Self.FK_ShoppingCart_Tovars">
+            <End Role="Tovars" EntitySet="Tovars" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovars_CategoryTovar" Association="Self.FK_Tovars_CategoryTovar">
+            <End Role="CategoryTovar" EntitySet="CategoryTovar" />
+            <End Role="Tovars" EntitySet="Tovars" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AptekaWPFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Byers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK_Byers_Logins" FromRole="Byers" ToRole="Logins" />
+          <NavigationProperty Name="Favourites" Relationship="Self.FK_Favourites_Byers" FromRole="Byers" ToRole="Favourites" />
+          <NavigationProperty Name="HistoryZakaz" Relationship="Self.FK_HistoryZakaz_Byers" FromRole="Byers" ToRole="HistoryZakaz" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Byers" FromRole="Byers" ToRole="Reviews" />
+          <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_ShoppingCart_Byers" FromRole="Byers" ToRole="ShoppingCart" />
+        </EntityType>
+        <EntityType Name="CategoryTovar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tovars" Relationship="Self.FK_Tovars_CategoryTovar" FromRole="CategoryTovar" ToRole="Tovars" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Zarplata" Type="Decimal" Precision="7" Scale="2" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Logins" Relationship="Self.FK_Employee_Logins" FromRole="Employee" ToRole="Logins" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Employee_Roles" FromRole="Employee" ToRole="Roles" />
+          <NavigationProperty Name="HistoryZakaz" Relationship="Self.FK_HistoryZakaz_Employee" FromRole="Employee" ToRole="HistoryZakaz" />
+        </EntityType>
+        <EntityType Name="Favourites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Byers_Id" Type="Int32" Nullable="false" />
+          <Property Name="Tovar_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Byers" Relationship="Self.FK_Favourites_Byers" FromRole="Favourites" ToRole="Byers" />
+          <NavigationProperty Name="Tovars" Relationship="Self.FK_Favourites_Tovars" FromRole="Favourites" ToRole="Tovars" />
+        </EntityType>
+        <EntityType Name="HistoryZakaz">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Byers_Id" Type="Int32" Nullable="false" />
+          <Property Name="TovarId" Type="Int32" Nullable="false" />
+          <Property Name="Status_Id" Type="Int32" Nullable="false" />
+          <Property Name="TimeDelivery" Type="DateTime" Precision="3" />
+          <Property Name="Employee_Id" Type="Int32" />
+          <Property Name="PayMethodID" Type="Int32" />
+          <Property Name="Ocenka" Type="Int32" />
+          <NavigationProperty Name="Byers" Relationship="Self.FK_HistoryZakaz_Byers" FromRole="HistoryZakaz" ToRole="Byers" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_HistoryZakaz_Employee" FromRole="HistoryZakaz" ToRole="Employee" />
+          <NavigationProperty Name="PayMethod" Relationship="Self.FK_HistoryZakaz_PayMethod" FromRole="HistoryZakaz" ToRole="PayMethod" />
+          <NavigationProperty Name="StatusZakaz" Relationship="Self.FK_HistoryZakaz_StatusZakaz" FromRole="HistoryZakaz" ToRole="StatusZakaz" />
+          <NavigationProperty Name="Tovars" Relationship="Self.FK_HistoryZakaz_Tovars" FromRole="HistoryZakaz" ToRole="Tovars" />
+        </EntityType>
+        <EntityType Name="Logins">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Byers" Relationship="Self.FK_Byers_Logins" FromRole="Logins" ToRole="Byers" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Logins" FromRole="Logins" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="PayMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HistoryZakaz" Relationship="Self.FK_HistoryZakaz_PayMethod" FromRole="PayMethod" ToRole="HistoryZakaz" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ByerID" Type="Int32" />
+          <Property Name="TovarID" Type="Int32" />
+          <Property Name="Review" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Byers" Relationship="Self.FK_Reviews_Byers" FromRole="Reviews" ToRole="Byers" />
+          <NavigationProperty Name="Tovars" Relationship="Self.FK_Reviews_Tovars" FromRole="Reviews" ToRole="Tovars" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bonus" Type="Decimal" Precision="7" Scale="2" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Roles" FromRole="Roles" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="ShoppingCart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TovarID" Type="Int32" />
+          <Property Name="ByerID" Type="Int32" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="Byers" Relationship="Self.FK_ShoppingCart_Byers" FromRole="ShoppingCart" ToRole="Byers" />
+          <NavigationProperty Name="Tovars" Relationship="Self.FK_ShoppingCart_Tovars" FromRole="ShoppingCart" ToRole="Tovars" />
+        </EntityType>
+        <EntityType Name="StatusZakaz">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HistoryZakaz" Relationship="Self.FK_HistoryZakaz_StatusZakaz" FromRole="StatusZakaz" ToRole="HistoryZakaz" />
+        </EntityType>
+        <EntityType Name="Tovars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Category_Id" Type="Int32" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="SrokGodnostiDate" Type="DateTime" Precision="0" />
+          <Property Name="Info" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Instuction" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="7" Scale="0" />
+          <Property Name="SrokGodnosti" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Resept" Type="Boolean" />
+          <NavigationProperty Name="CategoryTovar" Relationship="Self.FK_Tovars_CategoryTovar" FromRole="Tovars" ToRole="CategoryTovar" />
+          <NavigationProperty Name="Favourites" Relationship="Self.FK_Favourites_Tovars" FromRole="Tovars" ToRole="Favourites" />
+          <NavigationProperty Name="HistoryZakaz" Relationship="Self.FK_HistoryZakaz_Tovars" FromRole="Tovars" ToRole="HistoryZakaz" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Tovars" FromRole="Tovars" ToRole="Reviews" />
+          <NavigationProperty Name="ShoppingCart" Relationship="Self.FK_ShoppingCart_Tovars" FromRole="Tovars" ToRole="ShoppingCart" />
+        </EntityType>
+        <Association Name="FK_Byers_Logins">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Byers" Type="Self.Byers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="Byers">
+              <PropertyRef Name="Login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourites_Byers">
+          <End Role="Byers" Type="Self.Byers" Multiplicity="1" />
+          <End Role="Favourites" Type="Self.Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Byers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="Byers_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_Byers">
+          <End Role="Byers" Type="Self.Byers" Multiplicity="1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Byers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="Byers_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Byers">
+          <End Role="Byers" Type="Self.Byers" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Byers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="ByerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCart_Byers">
+          <End Role="Byers" Type="Self.Byers" Multiplicity="0..1" />
+          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Byers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingCart">
+              <PropertyRef Name="ByerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tovars_CategoryTovar">
+          <End Role="CategoryTovar" Type="Self.CategoryTovar" Multiplicity="0..1" />
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryTovar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tovars">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Logins">
+          <End Role="Logins" Type="Self.Logins" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Logins">
+              <PropertyRef Name="Login" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourites_Tovars">
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="1" />
+          <End Role="Favourites" Type="Self.Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="Tovar_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_PayMethod">
+          <End Role="PayMethod" Type="Self.PayMethod" Multiplicity="0..1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayMethod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="PayMethodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_StatusZakaz">
+          <End Role="StatusZakaz" Type="Self.StatusZakaz" Multiplicity="1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusZakaz">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="Status_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryZakaz_Tovars">
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="1" />
+          <End Role="HistoryZakaz" Type="Self.HistoryZakaz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HistoryZakaz">
+              <PropertyRef Name="TovarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_Tovars">
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="TovarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShoppingCart_Tovars">
+          <End Role="Tovars" Type="Self.Tovars" Multiplicity="0..1" />
+          <End Role="ShoppingCart" Type="Self.ShoppingCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tovars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShoppingCart">
+              <PropertyRef Name="TovarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AptekaWPFEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Byers" EntityType="Self.Byers" />
+          <EntitySet Name="CategoryTovar" EntityType="Self.CategoryTovar" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Favourites" EntityType="Self.Favourites" />
+          <EntitySet Name="HistoryZakaz" EntityType="Self.HistoryZakaz" />
+          <EntitySet Name="Logins" EntityType="Self.Logins" />
+          <EntitySet Name="PayMethod" EntityType="Self.PayMethod" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="ShoppingCart" EntityType="Self.ShoppingCart" />
+          <EntitySet Name="StatusZakaz" EntityType="Self.StatusZakaz" />
+          <EntitySet Name="Tovars" EntityType="Self.Tovars" />
+          <AssociationSet Name="FK_Byers_Logins" Association="Self.FK_Byers_Logins">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Byers" EntitySet="Byers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourites_Byers" Association="Self.FK_Favourites_Byers">
+            <End Role="Byers" EntitySet="Byers" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_Byers" Association="Self.FK_HistoryZakaz_Byers">
+            <End Role="Byers" EntitySet="Byers" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Byers" Association="Self.FK_Reviews_Byers">
+            <End Role="Byers" EntitySet="Byers" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCart_Byers" Association="Self.FK_ShoppingCart_Byers">
+            <End Role="Byers" EntitySet="Byers" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tovars_CategoryTovar" Association="Self.FK_Tovars_CategoryTovar">
+            <End Role="CategoryTovar" EntitySet="CategoryTovar" />
+            <End Role="Tovars" EntitySet="Tovars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Logins" Association="Self.FK_Employee_Logins">
+            <End Role="Logins" EntitySet="Logins" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Roles" Association="Self.FK_Employee_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_Employee" Association="Self.FK_HistoryZakaz_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourites_Tovars" Association="Self.FK_Favourites_Tovars">
+            <End Role="Tovars" EntitySet="Tovars" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_PayMethod" Association="Self.FK_HistoryZakaz_PayMethod">
+            <End Role="PayMethod" EntitySet="PayMethod" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_StatusZakaz" Association="Self.FK_HistoryZakaz_StatusZakaz">
+            <End Role="StatusZakaz" EntitySet="StatusZakaz" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryZakaz_Tovars" Association="Self.FK_HistoryZakaz_Tovars">
+            <End Role="Tovars" EntitySet="Tovars" />
+            <End Role="HistoryZakaz" EntitySet="HistoryZakaz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_Tovars" Association="Self.FK_Reviews_Tovars">
+            <End Role="Tovars" EntitySet="Tovars" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShoppingCart_Tovars" Association="Self.FK_ShoppingCart_Tovars">
+            <End Role="Tovars" EntitySet="Tovars" />
+            <End Role="ShoppingCart" EntitySet="ShoppingCart" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AptekaWPFModelContainer" CdmEntityContainer="AptekaWPFEntities1">
+          <EntitySetMapping Name="Byers">
+            <EntityTypeMapping TypeName="AptekaWPFModel.Byers">
+              <MappingFragment StoreEntitySet="Byers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryTovar">
+            <EntityTypeMapping TypeName="AptekaWPFModel.CategoryTovar">
+              <MappingFragment StoreEntitySet="CategoryTovar">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="AptekaWPFModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Zarplata" ColumnName="Zarplata" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favourites">
+            <EntityTypeMapping TypeName="AptekaWPFModel.Favourites">
+              <MappingFragment StoreEntitySet="Favourites">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Byers_Id" ColumnName="Byers_Id" />
+                <ScalarProperty Name="Tovar_Id" ColumnName="Tovar_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryZakaz">
+            <EntityTypeMapping TypeName="AptekaWPFModel.HistoryZakaz">
+              <MappingFragment StoreEntitySet="HistoryZakaz">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Byers_Id" ColumnName="Byers_Id" />
+                <ScalarProperty Name="TovarId" ColumnName="TovarId" />
+                <ScalarProperty Name="Status_Id" ColumnName="Status_Id" />
+                <ScalarProperty Name="TimeDelivery" ColumnName="TimeDelivery" />
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="PayMethodID" ColumnName="PayMethodID" />
+                <ScalarProperty Name="Ocenka" ColumnName="Ocenka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logins">
+            <EntityTypeMapping TypeName="AptekaWPFModel.Logins">
+              <MappingFragment StoreEntitySet="Logins">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayMethod">
+            <EntityTypeMapping TypeName="AptekaWPFModel.PayMethod">
+              <MappingFragment StoreEntitySet="PayMethod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="AptekaWPFModel.Reviews">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ByerID" ColumnName="ByerID" />
+                <ScalarProperty Name="TovarID" ColumnName="TovarID" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AptekaWPFModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingCart">
+            <EntityTypeMapping TypeName="AptekaWPFModel.ShoppingCart">
+              <MappingFragment StoreEntitySet="ShoppingCart">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TovarID" ColumnName="TovarID" />
+                <ScalarProperty Name="ByerID" ColumnName="ByerID" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusZakaz">
+            <EntityTypeMapping TypeName="AptekaWPFModel.StatusZakaz">
+              <MappingFragment StoreEntitySet="StatusZakaz">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tovars">
+            <EntityTypeMapping TypeName="AptekaWPFModel.Tovars">
+              <MappingFragment StoreEntitySet="Tovars">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="SrokGodnostiDate" ColumnName="SrokGodnostiDate" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Instuction" ColumnName="Instuction" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SrokGodnosti" ColumnName="SrokGodnosti" />
+                <ScalarProperty Name="Resept" ColumnName="Resept" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

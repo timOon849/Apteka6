@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b4845ceb66b34c7686c77f64c1acaa70" Name="Diagram1" ZoomLevel="169">
+        <EntityTypeShape EntityType="AptekaWPFModel.Byers" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.CategoryTovar" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.Employee" Width="1.5" PointX="6" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.Favourites" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.HistoryZakaz" Width="1.5" PointX="8.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.Logins" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.PayMethod" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.Reviews" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.Roles" Width="1.5" PointX="3.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.ShoppingCart" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.StatusZakaz" Width="1.5" PointX="6" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaWPFModel.Tovars" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="AptekaWPFModel.FK_Byers_Logins" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_Favourites_Byers" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_HistoryZakaz_Byers" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_Reviews_Byers" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_ShoppingCart_Byers" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_Tovars_CategoryTovar" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_Employee_Logins" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_Employee_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_HistoryZakaz_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_Favourites_Tovars" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_HistoryZakaz_PayMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_HistoryZakaz_StatusZakaz" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_HistoryZakaz_Tovars" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_Reviews_Tovars" ManuallyRouted="false" />
+        <AssociationConnector Association="AptekaWPFModel.FK_ShoppingCart_Tovars" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

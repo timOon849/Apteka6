@@ -1,0 +1,64 @@
+﻿<Page x:Class="Apteka6.Pages.AuthPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Apteka6.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="AuthPage">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="MainGrid">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
+                <Border CornerRadius="15" BorderThickness="4" BorderBrush="White">
+                    <StackPanel Background="White">
+                        <Image Margin="0 30 0 20" Height="72" Width="73" ></Image>
+                        <TextBlock Style="{StaticResource AllText}" Text="Вход"  FontFamily="VK Sans Display Medium" FontSize="24" Foreground="Black"/>
+                        <TextBox x:Name="LogBox" Padding="10" Style="{StaticResource InfoUser}" Margin="0 30 0 5" BorderBrush="#edeef0" Width="272" Height="36" Background="#edeef0"/>
+                        <PasswordBox x:Name="PassBox" Style="{StaticResource RoundedTextBox}" Padding="10" Margin="0 5 0 5" BorderBrush="#edeef0" Width="272" Height="36" Background="#edeef0"/>
+                        <Button x:Name="LogBtn" Content="Войти" Background="#222831" HorizontalAlignment="Center" Foreground="White" FontFamily="VK Sans Display Medium" FontSize="16" Click="LogBtn_Click"/>
+                        <TextBlock Style="{StaticResource AllText}" Text="Нет аккаунта?" 
+                                   HorizontalAlignment="Left" 
+                                   Margin="20, 0"
+                                   FontFamily="VK Sans Display Medium" 
+                                   FontSize="16" Foreground="#464C59"/>
+                        <Button x:Name="RegBtn" Content="Зарегистрироваться" 
+                                Background="#464C59" Margin="0, 10"
+                                HorizontalAlignment="Center" Foreground="White" 
+                                FontFamily="VK Sans Display Medium" FontSize="16" Click="RegBtn_Click"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="50 0"  Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="ЗдоровьеРТ " Style="{StaticResource BaseText}"/>
+                <TextBlock Text="© 2024-2025" Foreground="LightSlateGray" Style="{StaticResource AllText}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Республика Татарстан" Style="{StaticResource FooterText}"/>
+                <TextBlock Text="Новости" Style="{StaticResource FooterText}"/>
+                <TextBlock Text="Разработчикам" Style="{StaticResource FooterText}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Русский" Style="{StaticResource FooterText}"/>
+                <TextBlock Text="Український" Style="{StaticResource FooterText}"/>
+                <TextBlock Text="English" Style="{StaticResource FooterText}"/>
+                <TextBlock Text="все языки >" Style="{StaticResource FooterText}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

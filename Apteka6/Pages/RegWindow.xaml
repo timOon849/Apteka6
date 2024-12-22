@@ -1,0 +1,60 @@
+﻿<Window x:Class="Apteka6.Pages.RegWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apteka6.Pages"
+        mc:Ignorable="d"
+        Title="RegWindow" Height="700" Width="500">
+    <Grid Background="#edeef0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Border CornerRadius="15" BorderThickness="4" BorderBrush="White" Padding="20" Background="White">
+                <StackPanel>
+                    <TextBlock Text="Имя" Style="{StaticResource FooterText}" HorizontalAlignment="Left"/>
+
+
+                    <Border Style="{StaticResource BorderReg}">
+                        <TextBox x:Name="NameBox"  Style="{StaticResource RegBox}"/>
+                    </Border>
+
+                    <TextBlock Text="Фамилия" Style="{StaticResource FooterText}" HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource BorderReg}">
+                        <TextBox x:Name="FNameBox" Style="{StaticResource RegBox}"/>
+                    </Border>
+
+                    <TextBlock Text="Дата рождения" Style="{StaticResource FooterText}" HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource BorderReg}">
+                        <TextBox x:Name="BirthdayBox" Style="{StaticResource RegBox}"/>
+                    </Border>
+
+                    <TextBlock Text="Логин" Style="{StaticResource FooterText}" HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource BorderReg}">
+                        <TextBox x:Name="LogBox" Style="{StaticResource RegBox}"/>
+                    </Border>
+
+                    <TextBlock Text="Пароль" Style="{StaticResource FooterText}" HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource BorderReg}">
+                        <TextBox x:Name="PassBox" Style="{StaticResource RegBox}"/>
+                    </Border>
+
+                    <TextBlock Text="Повторите пароль" Style="{StaticResource FooterText}" HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource BorderReg}">
+                        <TextBox x:Name="Pass2Box" Style="{StaticResource RegBox}"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+
+        <Button x:Name="RegBtn" Content="Зарегистрироваться" Background="#4ab34c" HorizontalAlignment="Center" Foreground="White" Grid.ColumnSpan="3" Grid.Row="2" FontFamily="VK Sans Display Medium" FontSize="16" Click="RegBtn_Click"/>
+    </Grid>
+</Window>

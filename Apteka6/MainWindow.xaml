@@ -1,0 +1,29 @@
+﻿<Window x:Class="Apteka6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apteka6"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920"
+        WindowState="Maximized"
+        WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Height="40" Margin="50,0,0,0" HorizontalAlignment="Left"></Image>
+        <TextBlock FontFamily="VK Sans Display" FontSize="15" FontWeight="Medium" Text="ЗдоровьеРТ" Grid.Row="0" Margin="95,15,0,15" HorizontalAlignment="Left"/>
+        <Button x:Name="CatalogBtn" Content="Каталог" VerticalAlignment="Center" Foreground="#222825"  Background="{x:Null}" HorizontalAlignment="Left" FontFamily="VK Sans Display Medium" FontSize="12" Height="30" Margin="300,0,0,0" Width="80" Click="CatalogBtn_Click" />
+        <Button x:Name="CartBtn" Content="Корзина" VerticalAlignment="Center" Foreground="#222825"  Background="{x:Null}" HorizontalAlignment="Left" FontFamily="VK Sans Display Medium" FontSize="12" Height="30" Margin="400,0,0,0" Width="80" Click="CartBtn_Click" />
+
+        <Button x:Name="Account"  VerticalAlignment="Center" Foreground="#222825"  Background="{x:Null}" HorizontalAlignment="Left" FontFamily="VK Sans Display Medium" FontSize="12" Height="30" Margin="1700,0,0,0" Width="100" Click="Account_Click"/>
+
+
+        <Grid Background="White" Panel.ZIndex="-1"></Grid>
+        <Frame x:Name="mainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Grid.RowSpan="2"/>
+    </Grid>
+</Window>
